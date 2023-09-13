@@ -8,13 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var petalOffset = -20.0
-    @State private var petalWidht = 100.0
+    @State private var amount = 0.0
 
     var body: some View {
-        Capsule()
-            .strokeBorder(ImagePaint(image: Image("Example"), sourceRect: CGRect(x: 0, y: 0.25, width: 1, height: 0.25), scale: 0.3), lineWidth: 50)
-            .frame(height: 500)
+        VStack {
+            ZStack {
+                Circle()
+                    .fill(Color(red: 1, green: 0, blue: 0))
+                    .frame(width: 200 * amount)
+                    .offset(x: -50, y: -80)
+                    .blendMode(.screen)
+                
+                Circle()
+                    .fill(Color(red: 0, green: 1, blue: 0))
+                    .frame(width: 200 * amount)
+                    .offset(x: 50, y: -80)
+                    .blendMode(.screen)
+                
+                Circle()
+                    .fill(Color(red: 0, green: 0, blue: 1))
+                    .frame(width: 200 * amount)
+                    .blendMode(.screen)
+            }
+            .frame(width: 300, height: 300)
+            
+            Slider(value: $amount)
+                .padding()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.black)
+        .ignoresSafeArea()
     }
 }
 
